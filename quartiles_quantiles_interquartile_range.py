@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+df = pd.read_csv('Titanic_Dataset.csv')
+print(df.head(10))
+print(df.describe())
+print(df.info())
+print(df.isnull().sum())
+age_q1 = np.quantile(df['Age'], 0.25)
+age_q2 = np.quantile(df['Age'], 0.50)
+age_q3 = np.quantile(df['Age'], 0.75)
+print("age quantiles--")
+print("Q1--", age_q1)
+print("Q2--", age_q2)
+print("Q3--", age_q3)
+IQR_age = age_q1 - age_q3
+print("Interquartile range", IQR_age)
+plt.hist(df['Age'], color='black', edgecolor='red')
+plt.xlabel("Age")
+plt.ylabel("Count of passengers")
+plt.show()
+fare_q1 = np.quantile(df['Fare'], 0.25)
+fare_q2 = np.quantile(df['Fare'], 0.50)
+fare_q3 = np.quantile(df['Fare'], 0.75)
+print("Fare quantiles--")
+print("Q1--", fare_q1)
+print("Q2--", fare_q2)
+print("Q3--", fare_q3)
+IQR_fare = fare_q1 - fare_q3
+print("Interquartile range", IQR_fare)
+bins_fare = np.arange(0, 250, 20)
+plt.hist(df['Fare'], bins='bins_fare', color='purple')
+plt.xticks(bins_fare)
+plt.show()
