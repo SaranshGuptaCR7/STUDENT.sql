@@ -1,0 +1,27 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+df = pd.read_csv('Bestsellers_with_categories.csv')
+print(df.head())
+print(df.info())
+print(df.describe())
+print(df.isnull().any())
+print(df.isnull().sum())
+var_user_rating = np.var(df['User Rating'])
+print("Variance of User Rating:", var_user_rating)
+std_user_rating = np.std(df['User Rating'])
+print("Standard Deviation of User Rating:", std_user_rating)
+plt.figure(figsize=(10, 6))
+bins_user_rating = np.arange(0, 5.5, 0.5)
+sns.histplot(df['User Rating'], bins=bins_user_rating, kde=True, color='maroon')
+plt.title('Distribution of User Ratings', fontsize=16, fontfamily='Verdana', color='darkred')
+plt.xlabel('User Rating', fontsize=12, fontfamily='cursive', color='darkred')
+plt.ylabel('Frequency', fontsize=12, fontfamily='bahnschrift', color='darkred')
+plt.show()  
+bins_price = np.arange(0, 30, 5)    
+sns.histplot(df['Price'], bins=bins_price, color='lightcoral', kde=True)
+plt.title('Distribution of Book Prices', fontsize=16, fontfamily='georgia', color='darkred')
+plt.xlabel('Price', fontsize=12, fontfamily='cursive', color='darkred')
+plt.ylabel('Frequency', fontsize=12, fontfamily='bahnschrift', color='darkred')
+plt.show()
