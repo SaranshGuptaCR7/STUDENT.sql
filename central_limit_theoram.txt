@@ -1,0 +1,6 @@
+Examples of Central Limit Theoram in Python:
+1.) Taking population of a crowd or a country
+2.) Taking avg height of a class of stregth 45
+3.) Taking results of multiple dice rolls
+4.) Taking avg production of crops in a perticular month or year
+5.) Finding/ Predicting the avg rainfall that will happen in the following month
