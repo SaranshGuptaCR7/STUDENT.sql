@@ -1,0 +1,6 @@
+Machine learning can be used in the followeing situations(basically examples of it):
+1.) Using users patterns the macine can recommend videos or content similar to it
+2.) E mails uses machine learning to detect spam e mails
+3.) It can be used to detect frauds in banking
+4.) It can be used in cyber security by studying the source of the fraud and acting immediatly resulting, the agencies can track the scammer
+5.) In military purposes machine learning can be used to make sratigies or can be used to study the lay out of the place where they are heading
