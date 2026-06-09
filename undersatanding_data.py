@@ -1,0 +1,27 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+Modi_ji = pd.read_csv("matches.csv")
+Putin = pd.read_csv("deliveries.csv")
+print(Modi_ji.head(9))
+print(Putin.head(11))
+print(Modi_ji.isnull().any())
+print(Putin.isnull().any())
+print(Modi_ji.info())
+print(Putin.info())
+sns.heatmap(Modi_ji.isnull(), cbar=False, cmap="viridis", annot=True)
+plt.show()
+sns.heatmap(Putin.isnull(), cbar=False, cmap="viridis", annot=True)
+plt.show()
+Modi_ji.dropna(inplace=True)
+Putin.dropna(inplace=True)
+print(pd.get_dummies(Modi_ji["team1"]).head())
+team1= pd.get_dummies(Modi_ji["team1"], drop_first=True)
+team1.head(9)
+print(pd.get_dummies(Putin["batting_team"]).head(9))
+batting_team = pd.get_dummies(Putin["batting_team"], drop_first=True)
+non_striker = pd.get_dummies(Putin["non_striker"], drop_first=True)
+non_striker.head(9)
+Modi_Putin = pd.concat([team1, batting_team, non_striker], axis=1)
+print(Modi_Putin.head())
