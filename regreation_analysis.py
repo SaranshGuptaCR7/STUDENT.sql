@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+x_train = np.array([0,1,2,3,4,5,6,7,8,9])
+y_train = np.array([0,0.5,1,1.5,2,2.5,3,3.5,4,4.5])
+x_mean = np.mean(x_train)
+y_mean = np.mean(y_train)
+b1 = np.sum((x_train - x_mean) * (y_train - y_mean)) / np.sum((x_train - x_mean)**2)
+b0 = y_mean - b1 * x_mean
+print("Slope (b1) =", b1)
+print("Intercept (b0) =", b0)
+print(f"Regression Equation: y = {b0:.2f} + {b1:.2f}x")
+y_pred = b0 + b1 * x_train
+mse = np.mean((y_train - y_pred)**2)
+print("Mean Squared Error =", mse)
+ss_total = np.sum((y_train - y_mean)**2)
+ss_residual = np.sum((y_train - y_pred)**2)
+r2 = 1 - (ss_residual / ss_total)
+print("R² Score =", r2)
+plt.scatter(x_train, y_train, color='blue', label='Actual Data')
+plt.plot(x_train, y_pred, color='red', label='Regression Line')
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Linear Regression")
+plt.legend()
+plt.show()
