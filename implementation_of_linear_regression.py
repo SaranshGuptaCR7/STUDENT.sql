@@ -1,22 +1,34 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-df = pd.read_csv('petrol_consumption.csv')
-print(df.head())
-print(df.describe())
-x = df[['Petrol_tax', 'Average_income', 'Paved_Highways', 'Population_Driver_licence(%)']]
-y = df['Petrol_Consumption']
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0)
-from sklearn.linear_model import LinearRegression
-regression = LinearRegression()
-regression.fit(x_train, y_train)
-coeff_df = pd.DataFrame(regression.coef_, x.columns, columns=['Coefficient'])
-print(coeff_df)
-y_pred = regression.predict(x_test)
-df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
-print(df)
-from sklearn import metrics
-print("Mean Absolute Error:", round(metrics.mean_absolute_error(y_test, y_pred), 26))
-print("Mean Squared Error:", round(metrics.mean_squared_error(y_test, y_pred),11))
-print("Root Mean Squared Error:", round(np.sqrt(metrics.mean_squared_error(y_test, y_pred)),9))
+df = pd.read_csv("xydataset(1).csv", header=None)
+df = df.drop(columns=[0])
+x_train = df.iloc[:,0].values
+y_train = df.iloc[:,1].values
+m = 0
+b = 0
+step_size = 0.0001
+steps = 1000
+n = len(x_train)
+for i in range(steps):
+    y_pred = m * x_train + b
+    dm = (-2/n) * np.sum(x_train * (y_train - y_pred))
+    db = (-2/n) * np.sum(y_train - y_pred)
+    m = m - step_size * dm
+    b = b - step_size * db
+y_pred = m * x_train + b
+print("Slope (m):", m)
+print("Intercept (b):", b)
+mse = np.mean((y_train - y_pred)**2)
+print("Mean Squared Error:", mse)
+ss_total = np.sum((y_train - np.mean(y_train))**2)
+ss_residual = np.sum((y_train - y_pred)**2)
+r2 = 1 - (ss_residual / ss_total)
+print("R² Score:", r2)
+plt.scatter(x_train, y_train, color="blue", label="Actual Data")
+plt.plot(x_train, y_pred, color="red", label="Regression Line")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Linear Regression using Gradient Descent")
+plt.legend()
+plt.show()
