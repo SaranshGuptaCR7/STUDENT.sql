@@ -1,16 +1,19 @@
+import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.datasets import load_breast_cancer
-df = load_breast_cancer()       
-sns.set_style("dark")
-import matplotlib as mlt
-mlt.style.use(['https://gist.githubusercontent.com/BrendanMartin/01e71bb9550774e2ccff3af7574c0020/raw/6fa9681c7d0232d34c9271de9be150e584e606fe/lds_default.mplstyle'])
-mlt.rcParams.update({"figure.figsize": (8, 6), "axes.titlepad": 22.0})
-print("Target variables:", df['target_names'])
-(unique, counts) = np.unique(df['target'], return_counts=True)
-print("Unique values of the target variables", unique)
-print("Counts of the target variables", counts)
-sns.barplot(x=df['target_names'], y=counts)
-plt.title("Target variables counts in dataset")
-plt.show()
+df = pd.read_csv("glass.csv")
+print(df.head(5))
+print(df.dtypes)
+print(df.info())
+target = df.iloc[:, -1]
+print("\nTarget variables name:", df.columns[-1])
+unique, counts = np.unique(target, return_counts=True)
+print("\nUnique values in target variables:", unique)
+print("Counts of the target variables:", counts)
+if len(unique) == 2:
+    print("\nThe target variable is binary.")
+else:
+    print("\nThe target variable is multi-class.")
+if len(unique) == 2:
+    print("\nComment: The dataset has two target classes, which means it is binary")
+else:
+    print("\nComment: The dataset has", len(unique), "target classes, which means it is multi-class")   
